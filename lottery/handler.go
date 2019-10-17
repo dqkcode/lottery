@@ -19,16 +19,25 @@ func NewHandlerFunc() *HandlerFunc {
 
 func (h *HandlerFunc) getResult(w http.ResponseWriter, r *http.Request) {
 
-	numbers := strings.Split(r.FormValue("numbers"), "")
-	chanel := r.FormValue("chanel")
-	time := r.FormValue("time")
-	crawler.GetResultFromWebsite(numbers, chanel, time)
+	// numbers := strings.Split(r.FormValue("numbers"), "")
+	// chanel := r.FormValue("chanel")
+	// time := r.FormValue("time")
+	query := r.URL.Query()
+	numbers := strings.Split(query["numbers"][0], "")
+	channel := query["channel"][0]
+	day := query["day"][0]
+	month := query["month"][0]
+	year := query["year"][0]
+
+	crawler.GetResultFromWebsite(numbers, channel, day, month, year)
 
 	err := json.NewEncoder(w).Encode([]map[string]interface{}{
 		{
 			"numbers": numbers,
-			"chanel":  chanel,
-			"time":    time,
+			"channel": channel,
+			"day":     day,
+			"month":   month,
+			"year":    year,
 		},
 	})
 	if err != nil {
