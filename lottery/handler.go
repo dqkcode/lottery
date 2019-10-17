@@ -12,7 +12,8 @@ import (
 type HandlerFunc struct {
 }
 
-func NewHandler() *HandlerFunc {
+//create new HandlerFunc
+func NewHandlerFunc() *HandlerFunc {
 	return &HandlerFunc{}
 }
 

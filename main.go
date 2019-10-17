@@ -16,7 +16,7 @@ func main() {
 
 	routes := make([]types.Route, 0)
 
-	lotteryHandler := lottery.NewHandler()
+	lotteryHandler := lottery.NewHandlerFunc()
 
 	routes = append(routes, lotteryHandler.Routes()...)
 
